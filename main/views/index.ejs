@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO_DO_LISTS</title>
+    <link rel="stylesheet" type="text/css" href="/main.css">
+</head>
+<body>
+    <div class="container gradient-background">
+    <div class="cen-container">
+        <h1>TO_DO_LISTS</h1>
+        <p><%=  time = new Date(); %></p>
+        <div class="row">
+    <form action="/add" method="post">        
+        <input type="text" name="listtoadd"  id="task" placeholder="Write Task here">
+        <button id="but" type="submit">ADD</button>
+    </form>        
+        </div>
+        <ul id="list-container">
+            <% lists.forEach(list => { %>
+                <li id="list">
+                    <form action="/delete" method="post">
+                        <input type="checkbox" name="check" id="check" onclick="handleClick()" value=<%= list.name %>><%= list.name %>
+                        <button type="submit">Done</button>
+                    </form>
+                </li>
+            <%  }); %>
+        </ul>
+    </div>
+    </div>
+</body>    
+<script type="text/javascript">
+    function handleClick() {
+        const bool=document.getElementById("check").checked;
+        if (bool) {
+            const listSelected=document.getElementById("list");
+            listSelected.style.textDecoration="line-through";
+        } else{
+            const listSelected=document.getElementById("list");
+            listSelected.style.textDecoration="none";
+        }
+    }
+</script>
+</html>
